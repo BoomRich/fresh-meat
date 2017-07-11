@@ -24,3 +24,6 @@ hs_err_pid*
 #JPEG Files
 *.jpg
 *.jpeg
+
+#Target Files
+target/*
