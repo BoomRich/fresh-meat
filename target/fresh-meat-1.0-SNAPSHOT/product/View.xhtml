@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductViewDlg" widgetVar="ProductViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewProductTitle}">
+            <h:form id="ProductViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{productController.selected != null}">
+                        <h:outputText value="#{bundle.ViewProductLabel_productId}"/>
+                        <h:outputText value="#{productController.selected.productId}" title="#{bundle.ViewProductTitle_productId}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_productName}"/>
+                        <h:outputText value="#{productController.selected.productName}" title="#{bundle.ViewProductTitle_productName}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_productPrice}"/>
+                        <h:outputText value="#{productController.selected.productPrice}" title="#{bundle.ViewProductTitle_productPrice}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_productBrand}"/>
+                        <h:outputText value="#{productController.selected.productBrand}" title="#{bundle.ViewProductTitle_productBrand}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_productLocation}"/>
+                        <h:outputText value="#{productController.selected.productLocation}" title="#{bundle.ViewProductTitle_productLocation}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_shippingLocation}"/>
+                        <h:outputText value="#{productController.selected.shippingLocation}" title="#{bundle.ViewProductTitle_shippingLocation}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_previewImage}"/>
+                        <h:outputText value="#{productController.selected.previewImage}" title="#{bundle.ViewProductTitle_previewImage}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_detailImage}"/>
+                        <h:outputText value="#{productController.selected.detailImage}" title="#{bundle.ViewProductTitle_detailImage}"/>
+                        <h:outputText value="#{bundle.ViewProductLabel_categoryId}"/>
+                        <h:outputText value="#{productController.selected.categoryId}" title="#{bundle.ViewProductTitle_categoryId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ProductViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

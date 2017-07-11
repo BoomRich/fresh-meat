@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrderListViewDlg" widgetVar="OrderListViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewOrderListTitle}">
+            <h:form id="OrderListViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{orderListController.selected != null}">
+                        <h:outputText value="#{bundle.ViewOrderListLabel_orderId}"/>
+                        <h:outputText value="#{orderListController.selected.orderId}" title="#{bundle.ViewOrderListTitle_orderId}"/>
+                        <h:outputText value="#{bundle.ViewOrderListLabel_createTime}"/>
+                        <h:outputText value="#{orderListController.selected.createTime}" title="#{bundle.ViewOrderListTitle_createTime}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewOrderListLabel_shipAddress}"/>
+                        <h:outputText value="#{orderListController.selected.shipAddress}" title="#{bundle.ViewOrderListTitle_shipAddress}"/>
+                        <h:outputText value="#{bundle.ViewOrderListLabel_shipName}"/>
+                        <h:outputText value="#{orderListController.selected.shipName}" title="#{bundle.ViewOrderListTitle_shipName}"/>
+                        <h:outputText value="#{bundle.ViewOrderListLabel_mobile}"/>
+                        <h:outputText value="#{orderListController.selected.mobile}" title="#{bundle.ViewOrderListTitle_mobile}"/>
+                        <h:outputText value="#{bundle.ViewOrderListLabel_userId}"/>
+                        <h:outputText value="#{orderListController.selected.userId}" title="#{bundle.ViewOrderListTitle_userId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="OrderListViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

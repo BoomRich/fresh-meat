@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrderListCreateDlg" widgetVar="OrderListCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateOrderListTitle}">
+            <h:form id="OrderListCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{orderListController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateOrderListLabel_orderId}" for="orderId" />
+                        <p:inputText id="orderId" value="#{orderListController.selected.orderId}" title="#{bundle.CreateOrderListTitle_orderId}" required="true" requiredMessage="#{bundle.CreateOrderListRequiredMessage_orderId}"/>
+                        <p:outputLabel value="#{bundle.CreateOrderListLabel_createTime}" for="createTime" />
+                        <p:calendar id="createTime" pattern="MM/dd/yyyy HH:mm:ss" value="#{orderListController.selected.createTime}" title="#{bundle.EditOrderListTitle_createTime}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateOrderListLabel_shipAddress}" for="shipAddress" />
+                        <p:inputText id="shipAddress" value="#{orderListController.selected.shipAddress}" title="#{bundle.CreateOrderListTitle_shipAddress}" />
+                        <p:outputLabel value="#{bundle.CreateOrderListLabel_shipName}" for="shipName" />
+                        <p:inputText id="shipName" value="#{orderListController.selected.shipName}" title="#{bundle.CreateOrderListTitle_shipName}" />
+                        <p:outputLabel value="#{bundle.CreateOrderListLabel_mobile}" for="mobile" />
+                        <p:inputText id="mobile" value="#{orderListController.selected.mobile}" title="#{bundle.CreateOrderListTitle_mobile}" />
+                        <p:outputLabel value="#{bundle.CreateOrderListLabel_userId}" for="userId" />
+                        <p:selectOneMenu id="userId" value="#{orderListController.selected.userId}" required="true" requiredMessage="#{bundle.EditOrderListRequiredMessage_userId}">
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="userIdItem"
+                                           itemValue="#{userIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{orderListController.create}" value="#{bundle.Save}" update="display,:OrderListListForm:datalist,:growl" oncomplete="handleSubmit(args,'OrderListCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="OrderListCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
