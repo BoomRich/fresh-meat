@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:metadata>
+        <f:viewParam name="product_id" value="#{productPageController.productId}"></f:viewParam>
+        <f:viewParam name="amount" value="#{productPageController.amount}"></f:viewParam>
+    </f:metadata>
+    <h:head>
+        <title>#{productPageController.product.productName}</title>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north">
+                <h:form id="search">    
+                    <p:growl id="messages"/>
+                    <p:menubar>
+                        <p:menuitem value="首页" icon="ui-icon-home" url="index.xhtml"/>
+                        <p:menuitem value="购物车(#{cartController.sizeString})" icon="ui-icon-cart" url="cart.xhtml"/>
+                        <p:menuitem value="#{navController.userName}" url="#"/>
+                        <f:facet name="options">
+                            <p:inputText id="key" placeholder="搜索" value="鱼"/>
+                            <p:button value="搜索" onclick="window.open('searchResult.xhtml?search=' + document.getElementById('search:key').value, '_blank')" ></p:button>
+                            <p:button value="#{navController.logButtonLabel}" icon="ui-icon-extlink" href="../#{navController.logButtonHref}"/>
+                        </f:facet>
+                    </p:menubar>
+                </h:form>
+                <p:breadCrumb>
+                    <p:menuitem value="" url="#"></p:menuitem>
+                    <p:menuitem value="#{productPageController.firstCategory}" url="index.xhtml"></p:menuitem>
+                    <p:menuitem value="#{productPageController.secondCategory}" url="categoryList.xhtml?category_id=#{categoryListController.categoryIDFrom(productPageController.firstCategory, productPageController.secondCategory)}"></p:menuitem>
+                    <p:menuitem value="#{productPageController.product.productName}" url="#"></p:menuitem>
+                </p:breadCrumb>
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+                <h2>#{productPageController.product.productName}</h2>
+                <p:dataList value="#{productPageController.detailImagePaths}" var="dimg" type="definition" lazy="true">
+                    <p:graphicImage name="#{dimg}" style="width: 640px"/>
+                </p:dataList>
+            </p:layoutUnit>
+            <p:layoutUnit position="west" size="300">
+                <p:imageSwitch effect="fade">
+                    <ui:repeat value="#{productPageController.previewImagePaths}" var="pimg">
+                        <p:graphicImage name="#{pimg}" styleClass="content" style="width: 300px;height: 300px"/>
+                    </ui:repeat>
+                </p:imageSwitch>
+                <p:panelGrid columns="2" style="width: 280px;margin: 10px">
+                    <f:facet name="header">商品信息</f:facet>
+                    <h:outputText value="品牌"></h:outputText>
+                    <h:outputText value="#{productPageController.product.productBrand}"></h:outputText>
+                    <h:outputText value="生产地"></h:outputText>
+                    <h:outputText value="#{productPageController.product.productLocation}"></h:outputText>
+                    <h:outputText value="发货地"></h:outputText>
+                    <h:outputText value="#{productPageController.product.shippingLocation}"></h:outputText>
+                    <h:outputText value="价格"></h:outputText>
+                    <h:outputText value="￥#{productPageController.product.productPrice}" style="font-size: xx-large;color: darkred"></h:outputText>
+                </p:panelGrid>
+                <h:form id="buy">
+                    <p:spinner value="#{productPageController.amount}" stepFactor="1" suffix="份" min="1" max="20" size="5" style="margin-left: 10px" id="amount" ></p:spinner>
+                    <h:inputHidden value="#{productPageController.productId}" id="product_id"></h:inputHidden>
+                    <p:button value="加入购物车" style="margin-left: 40px" onclick="window.open('cart.xhtml?product_id=' + document.getElementById('buy:product_id').value + '&amp;amount=' + document.getElementById('buy:amount_input').getAttribute('aria-valuenow'), '_blank')"></p:button>
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>
+

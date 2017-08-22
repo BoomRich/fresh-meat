@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReviewCreateDlg" widgetVar="ReviewCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateReviewTitle}">
+            <h:form id="ReviewCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reviewController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateReviewLabel_reviewId}" for="reviewId" />
+                        <p:inputText id="reviewId" value="#{reviewController.selected.reviewId}" title="#{bundle.CreateReviewTitle_reviewId}" required="true" requiredMessage="#{bundle.CreateReviewRequiredMessage_reviewId}"/>
+                        <p:outputLabel value="#{bundle.CreateReviewLabel_reviewComment}" for="reviewComment" />
+                        <p:inputText id="reviewComment" value="#{reviewController.selected.reviewComment}" title="#{bundle.CreateReviewTitle_reviewComment}" />
+                        <p:outputLabel value="#{bundle.CreateReviewLabel_productId}" for="productId" />
+                        <p:selectOneMenu id="productId" value="#{reviewController.selected.productId}" required="true" requiredMessage="#{bundle.EditReviewRequiredMessage_productId}">
+                            <f:selectItems value="#{productController.itemsAvailableSelectOne}"
+                                           var="productIdItem"
+                                           itemValue="#{productIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateReviewLabel_userId}" for="userId" />
+                        <p:selectOneMenu id="userId" value="#{reviewController.selected.userId}" required="true" requiredMessage="#{bundle.EditReviewRequiredMessage_userId}">
+                            <f:selectItems value="#{userController.itemsAvailableSelectOne}"
+                                           var="userIdItem"
+                                           itemValue="#{userIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{reviewController.create}" value="#{bundle.Save}" update="display,:ReviewListForm:datalist,:growl" oncomplete="handleSubmit(args,'ReviewCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ReviewCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

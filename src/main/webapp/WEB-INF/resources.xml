@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <Resource id="freshmeat" type="javax.sql.DataSource">#Thu Jul 13 11:29:48 CST 2017
+jdbcDriver=com.mysql.jdbc.Driver
+password=Chenrunze925
+userName=root
+jdbcUrl=jdbc\:mysql\://localhost\:3306/freshmeat?zeroDateTimeBehavior\=convertToNull
+</Resource>
+</resources>

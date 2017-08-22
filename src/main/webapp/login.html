@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="../../favicon.ico">
+        <title>登录</title>
+        <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <style type="text/css">
+            .form-signin{
+                max-width: 330px;
+                padding: 15px;
+                margin: 0 auto;
+            }
+            input{
+                margin-bottom: 3px;
+            }
+            .form-regist{
+                max-width: 330px;
+                padding: 15px;
+                margin: 0 auto;
+            }
+            input{
+                margin-bottom: 3px;
+            }
+        </style>
+        <style>
+            body {
+                background:url(faces/javax.faces.resource/img/background/BG1.jpeg);
+                background-size:cover;
+                background-repeat:no-repeat;
+                background-position-y: 50%
+            }
+        </style>
+        <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    </head>
+    <body>
+        <div class="container" id="notify"></div>
+        <div class="bg" id="signin">
+            <form class="form-signin" method="post" action="forelogin">
+                <h2 class="form-signin-heading">欢迎登录FreshMeat</h2>
+                <label for="inputEmail" class="sr-only">电子邮件</label>
+                <input type="email" name="email" id="registname" class="form-control" placeholder="电子邮件" required autofocus>
+                <label for="inputPassword" class="sr-only">密码</label>
+                <input type="password" name="password" id="registPassword" class="form-control" placeholder="密码" required>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me">记住我
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+            </form>
+        </div>
+    </body>
+</html>

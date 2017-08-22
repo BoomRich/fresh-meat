@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>freshMeat</title>
+            </f:facet>
+        </h:head>
+        <h:body>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" resizable="true" closable="true" collapsible="true">
+                    <h:form id="search">    
+                        <p:growl id="messages"/>
+                        <p:menubar>
+                            <p:menuitem value="首页" icon="ui-icon-home" url="index.xhtml"/>
+                            <p:menuitem value="购物车(#{cartController.sizeString})" icon="ui-icon-cart" url="cart.xhtml"/>
+                            <p:menuitem value="#{navController.userName}" url="#"/>
+                            <f:facet name="options">
+                                <p:inputText id="key" placeholder="搜索" value="鱼"/>
+                                <p:button value="搜索" onclick="window.open('searchResult.xhtml?search=' + document.getElementById('search:key').value, '_blank')" ></p:button>
+                                <p:button value="#{navController.logButtonLabel}" icon="ui-icon-extlink" href="../#{navController.logButtonHref}"/>
+                            </f:facet>
+                        </p:menubar>
+                    </h:form>
+                </p:layoutUnit>
+                <p:layoutUnit position="west" size="300" header="分类" collapsible="true">
+                    <p:slideMenu style="width:500px">
+                        <c:forEach items="#{categoryController.firstCategorys}" var="fc">
+                            <p:submenu label="#{fc}">
+                                <c:forEach items="#{categoryController.getSecondCategorys(fc)}" var="sc">
+                                    <p:menuitem value="#{sc}" url="categoryList.xhtml?category_id=#{categoryListController.categoryIDFrom(fc, sc)}"></p:menuitem>
+                                </c:forEach>
+                            </p:submenu>
+                        </c:forEach>
+                    </p:slideMenu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <p:imageSwitch effect="fade" speed="1000">
+                        <ui:repeat value="#{navController.indexBGNames}" var="image">
+                            <p:graphicImage name="#{image}" width="600"/>
+                        </ui:repeat>
+                    </p:imageSwitch>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
